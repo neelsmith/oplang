@@ -1,4 +1,4 @@
-package specs.oldpersian;
+package specs.oldpersian.transliteration;
 
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
@@ -10,6 +10,14 @@ import org.concordion.integration.junit3.ConcordionTestCase;
 public class TransliterationTest extends ConcordionTestCase {
     
     public String xlit(String op) {
-	return OPTransliteration.uToXLit(op);
+	String raw = OPTransliteration.uToXLit(op).replace("-","");
+	return (raw);
     }
+
+
+    public String cun(String xlit) {
+	String raw = OPTransliteration.(xlit);
+	return (raw);
+    }
+
 }
