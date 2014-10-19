@@ -10,14 +10,13 @@ import org.concordion.integration.junit3.ConcordionTestCase;
 public class AlphabeticTest extends ConcordionTestCase {
     
     public String xlit(String op) {
-	String raw = OPTransliteration.uToXLit(op).replace("-","");
-	return (raw);
+	return OPTransliteration.uToXLit(op);
+
     }
 
 
-    public String cun(String xlit) {
-	String raw = OPTransliteration.xlitToU(xlit);
-	return (raw);
+    public String cuneiform(String xlit) {
+	return OPTransliteration.xlitToU(xlit);
     }
 
 }

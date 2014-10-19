@@ -12,6 +12,65 @@ class OPTransliteration {
   static int WORD_DIVIDER = 66512
 
 
+  /** Map of code points to transliteration. Keys are
+   * transliteration strings, values are ints of Unicode
+   * code points.
+   */
+  static HashMap xlitMap = [
+    " " : WORD_DIVIDER,
+    "a" : 66464,
+    "i" : 66465,
+    "u" :  66466,
+
+    "ka" :  66467,
+    "ku" : 66468,
+    "ga" : 66469,
+    "gu" : 66470,
+    "xa" :  66471,
+    "ca" :  66472,
+
+    "ja" : 66473,
+    "ji" : 66474,
+
+    "ta" : 66475,
+    "tu" : 66476,
+    "da" :  66477,
+    "di" :  66478,
+    "du" :  66479,
+    "tha" :  66480,
+
+
+    "pa" : 66481,
+    "ba" : 66482,
+    "fa" :  66483,
+
+    "na" : 66484,
+    "nu" :  66485,
+    "ma" : 66486,
+    "mi" :  66487,
+    "mu" :  66488,
+
+    "ya" : 66489,
+
+    "va" : 66490,
+    "vi" : 66491,
+
+    "ra" :  66492,
+    "ru" : 66493,
+
+    "la" :  66494,
+    "sa" :  66495,
+    "za" :  66496,
+    "sha" :  66497,
+    "sra" :  66498,
+
+    "ha" : 66499
+  ]
+
+
+
+
+
   /** Finds index in a StringBuffer of the next code point
    * beyond a given index.
    * @param i Index to start looking from.
@@ -30,13 +89,28 @@ class OPTransliteration {
     }
   }
 
-  /** Convert a string in ASCII translitertion to 
+  /** Convert a string in ASCII transliteration to 
    * Old Persian range of Unicode.
    * @param s String  in ASCII transliteration.
    * @returns A String in the Unicode range for Old Persian.
    */
   static String xlitToU(String s) {
-    
+    StringBuilder sb = new StringBuilder()
+    // Split into words, then into tokens
+    def words = s.split(/ /)
+    words.each { w ->
+      def tokens = w.split('-')
+      tokens.each { t ->
+	System.err.println "Test ${t}"
+	String lc = t.toLowerCase()
+	if (xlitMap[lc]) {
+	  sb.appendCodePoint(xlitMap[lc])
+	} else {
+	System.err.println "No mapping for ${t}"
+	}
+      }
+    }
+    return sb.toString()
   }
 
   /** Convert a string in Old Persian range of Unicode
@@ -64,10 +138,12 @@ class OPTransliteration {
 
 	} else {
 	  String charXlit = xlitForCodePoint(nextCP)
-	  if (inWord) {
-	    xlit.append("-${charXlit}")
-	  } else {
-	    xlit.append(charXlit)
+	  if (charXlit.size() > 0) {
+	    if (inWord) {
+	      xlit.append("-${charXlit}")
+	    } else {
+	      xlit.append(charXlit)
+	    }
 	  }
 	  inWord = true
 	}
