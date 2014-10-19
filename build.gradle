@@ -39,7 +39,12 @@ repositories {
 dependencies {
   compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
   
-  testCompile group: 'junit', name: 'junit', version: junitVersion
+
+  
+  //testCompile group: 'junit', name: 'junit', version: junitVersion
+  testCompile 'junit:junit:4.11'
+  testCompile 'org.concordion:concordion:1.4.4'
+
   testCompile group :'xmlunit', name: 'xmlunit', version: xmlunitVersion
 }
 
@@ -51,3 +56,40 @@ uploadArchives {
   }
 }
 
+
+
+// for specs with concordion:
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir "${buildDir}/specs"
+        }
+        resources {
+            srcDir "${buildDir}/specs"
+        }
+    }
+}
+
+
+task copySpecs(type: Copy) {
+  from "specs"
+  into "${buildDir}/specs"
+}
+
+// Make all testing depend on a filter copy to buildDir.
+// If that works, make all testing depned on a md -> html xform,
+// and write specs in markdown.
+test.dependsOn  copySpecs
+
+test {
+    systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
+
+}

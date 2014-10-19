@@ -33,13 +33,11 @@ class OPTransliteration {
 	cpsFound++;
 	int nextCP = getFollowingCP(idx,uBuffer)
 	if (nextCP == WORD_DIVIDER) {
-	  println "OPTransliteration: word divider."
 	  xlit.append(" ")
 	  inWord = false
 
 	} else {
 	  String charXlit = xlitForCodePoint(nextCP)
-	  println "OPTransliteration: for code point ${nextCP}, got xlit ${charXlit} with inword ${inWord}"
 	  if (inWord) {
 	    xlit.append("-${charXlit}")
 	  } else {
@@ -49,7 +47,6 @@ class OPTransliteration {
 	}
       }
       idx = uBuffer.offsetByCodePoints(idx,1)
-      println "Advacne to ${cpsFound} out of ${max} (index ${idx} out of ${uBuffer.size()} )"
     }
     return xlit.toString()
   }
