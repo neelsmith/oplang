@@ -1,13 +1,24 @@
 package edu.holycross.shot.oldpersian
 
 
-/**
+/** A class for working with Old Persian strings represented
+ * either in the Old Persian range of Unicode, or in the
+ * transliteration scheme specified in this project.
  */
 class OPTransliteration {
 
+
+  /** Unicode code point for Old Persian word divider.*/
   static int WORD_DIVIDER = 66512
 
 
+  /** Finds index in a StringBuffer of the next code point
+   * beyond a given index.
+   * @param i Index to start looking from.
+   * @param buff StringBuffer to search in.
+   * @return Index of next code point, or -1 if there
+   * is none.
+   */
   static int getFollowingCP(int i, StringBuffer buff) {
     int nextIdx = buff.offsetByCodePoints(i,1)	
 
@@ -19,6 +30,21 @@ class OPTransliteration {
     }
   }
 
+  /** Convert a string in ASCII translitertion to 
+   * Old Persian range of Unicode.
+   * @param s String  in ASCII transliteration.
+   * @returns A String in the Unicode range for Old Persian.
+   */
+  static String xlitToU(String s) {
+    
+  }
+
+  /** Convert a string in Old Persian range of Unicode
+   * to the transliteration scheme specified in this project.
+   * @param s String of Old Persian represented in Unicode 
+   * range for Old Persian.
+   * @returns A String in ASCII transliteration.
+   */
   static String uToXLit(String s) {
     StringBuffer uBuffer = new StringBuffer(s)
     int cp = uBuffer.codePointAt(0)
@@ -51,6 +77,15 @@ class OPTransliteration {
     return xlit.toString()
   }
 
+
+
+  /** Converts a single Unicode code point to
+   * the corresponding transliteration.
+   * @param codept The Unicode code point for a
+   * single Old Persian character.
+   * @returns The corresponding transliteration, or a
+   * null string if the character is undefined.
+   */
   static String xlitForCodePoint(int codept) {
     String xlit = ""
 
@@ -171,11 +206,14 @@ class OPTransliteration {
     xlit = "ha"
     break
 
+
+    /* Add logograms, numbers... */
+
+
+
     default:
     System.err.println "OPTransliteration: uncrecognized code point " + codept
     break
-    /* Add logograms, numbers... */
-
 
     }
     return xlit
