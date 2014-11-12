@@ -1,6 +1,6 @@
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
-<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
 <title>Old Persian transliteration</title>
 </head>
 <body>
@@ -17,7 +17,7 @@ the Old Persian range of Unicode.)
 for thirty-six alphabetic signs:
 </p>
 
-   <table concordion:execute="#result = xlit(#cuneiform)">
+   <table concordion:execute="#result = getXlit(#cuneiform)">
      <tr>
        <th concordion:set="#cuneiform">Cuneiform character</th>
        <th concordion:assertEquals="#result">Transliteration</th>
@@ -72,7 +72,7 @@ codepoint for each sign.
 Unicode code point:
 </p>
 
-   <table concordion:execute="#result = cuneiform(#xlit)">
+   <table concordion:execute="#result = getCuneiform(#xlit)">
      <tr>
        <th concordion:set="#xlit">Transliteration</th>
        <th concordion:assertEquals="#result">Cuneiform character</th>

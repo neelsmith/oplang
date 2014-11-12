@@ -1,3 +1,9 @@
+/* 
+Directly use txtmark in the main build script:
+ */
+import com.github.rjeschke.txtmark.*
+
+
 apply plugin: "base"
 apply plugin:  "groovy"
 apply plugin:  "maven"
@@ -6,6 +12,7 @@ group = "edu.holycross.shot"
 version = '0.0.1'
 
 apply from: "versions.gradle"
+apply from: "conf.gradle"
 
 if (hasProperty('pub')) {
     System.err.print "Using configuration data from ${pub}"
@@ -28,6 +35,16 @@ if (hasProperty('pub')) {
 }
 
 
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath group: 'com.github.rjeschke', name: 'txtmark', version: '0.11'
+  }
+}
+
+
 
 repositories {
     mavenCentral()
@@ -38,7 +55,7 @@ repositories {
 
 dependencies {
   compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
-  
+
 
   
   //testCompile group: 'junit', name: 'junit', version: junitVersion
@@ -54,6 +71,11 @@ uploadArchives {
       authentication (userName: nexusUser, password: nexusPassword)
     }
   }
+}
+
+
+task convertMd() {
+  println Processor.process("*Real* markdown", Configuration.DEFAULT)
 }
 
 

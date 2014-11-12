@@ -9,14 +9,15 @@ import org.concordion.integration.junit3.ConcordionTestCase;
 
 public class AlphabeticTest extends ConcordionTestCase {
     
-    public String xlit(String op) {
+    public String getXlit(String op) {
 	return OPTransliteration.uToXLit(op);
 
     }
 
 
-    public String cuneiform(String xlit) {
-	return OPTransliteration.xlitToU(xlit);
+    public String getCuneiform(String xlit) {
+	System.err.println ("Get cuneiform for xlit " + xlit.toLowerCase());
+	return OPTransliteration.xlitToU(xlit.toLowerCase());
     }
 
 }

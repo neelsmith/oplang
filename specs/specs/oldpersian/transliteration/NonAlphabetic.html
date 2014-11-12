@@ -1,0 +1,32 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+<title>Old Persian transliteration: non-alphabetic characters</title>
+</head>
+<body>
+<h1>Transliteration of non-alphabetic characters</h1>
+<p>(Note: to read this specification properly,
+your browser must be capable of displaying
+characters outside Unicode's basic multilingual
+plane, and you must have a font installed covering
+the Old Persian range of Unicode.)
+</p>
+
+<h2>Numeric signs and punctuation</h2>
+<p>
+The sole punctuation mark in Old Persian, the word divider
+<code concordion:set="#worddiv">𐏐</code>,
+is transcribed with a colon, <code concordion:assertEquals="xlitPunct(#worddiv)">:</code>.
+</p>
+<div class="example">
+  <p>Conversely, the colon <code concordion:set="#colon">:</code> can be converted to the word divider,
+  <code concordion:assertEquals="cuneiformPunct(#colon)">𐏐</code>.
+  </p>
+</div>
+
+
+<h2>Logograms</h2>
+
+
+</body>
+</html>

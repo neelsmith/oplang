@@ -7,6 +7,8 @@ package edu.holycross.shot.oldpersian
  */
 class OPTransliteration {
 
+  //static Integer debug = 1
+  
 
   /** Unicode code point for Old Persian word divider.*/
   static int WORD_DIVIDER = 66512
@@ -17,7 +19,7 @@ class OPTransliteration {
    * code points.
    */
   static HashMap xlitMap = [
-    " " : WORD_DIVIDER,
+    ":" : 66512,
     "a" : 66464,
     "i" : 66465,
     "u" :  66466,
@@ -96,17 +98,38 @@ class OPTransliteration {
    */
   static String xlitToU(String s) {
     StringBuilder sb = new StringBuilder()
-    // Split into words, then into tokens
-    def words = s.split(/ /)
+    // Ignore white space, split into words, then tokenize:
+    def words = []
+    def currWord = ""
+    s.each { c ->
+      switch (c) {
+      case ' ':
+      // omit
+      break
+      case ':':
+      if (currWord.size() > 0) {
+	words.add(currWord)
+      }
+      words.add(":")
+      currWord = ""
+      break
+      default :
+      currWord +=  c
+      break
+      }
+    }
+    // don't forget possible trailing word!
+    if (currWord.size() > 0) {
+      words.add(currWord)
+    }
     words.each { w ->
       def tokens = w.split('-')
       tokens.each { t ->
-	System.err.println "Test ${t}"
 	String lc = t.toLowerCase()
 	if (xlitMap[lc]) {
 	  sb.appendCodePoint(xlitMap[lc])
 	} else {
-	System.err.println "No mapping for ${t}"
+	  System.err.println "No mapping for ${t}"
 	}
       }
     }
@@ -122,21 +145,22 @@ class OPTransliteration {
   static String uToXLit(String s) {
     StringBuffer uBuffer = new StringBuffer(s)
     int cp = uBuffer.codePointAt(0)
-    StringBuffer xlit = new StringBuffer(xlitForCodePoint(cp))    
 
     int max = uBuffer.codePointCount(0, uBuffer.length() - 1)
+    StringBuffer xlit = new StringBuffer(xlitForCodePoint(cp));
     int idx = 0
     boolean inWord = (cp != WORD_DIVIDER)
     Integer cpsFound = 0
     while (cpsFound < max) {
-      if (getFollowingCP(idx, uBuffer) != null) {
-	cpsFound++;
-	int nextCP = getFollowingCP(idx,uBuffer)
+      cpsFound++;
+      int nextCP = getFollowingCP(idx,uBuffer)
+      if (nextCP > 0) {
 	if (nextCP == WORD_DIVIDER) {
-	  xlit.append(" ")
+	  xlit.append(":")
 	  inWord = false
 
 	} else {
+	  
 	  String charXlit = xlitForCodePoint(nextCP)
 	  if (charXlit.size() > 0) {
 	    if (inWord) {
@@ -166,6 +190,7 @@ class OPTransliteration {
     String xlit = ""
 
     switch (codept) {
+
 
     case 66464:
     xlit = "a"
@@ -283,12 +308,13 @@ class OPTransliteration {
     break
 
 
+    case 66512:
+    xlit = ":"
+    break
+
     /* Add logograms, numbers... */
-
-
-
     default:
-    System.err.println "OPTransliteration: uncrecognized code point " + codept
+    System.err.println "OPTransliteration:xlitForCodePt: uncrecognized code point " + codept
     break
 
     }
