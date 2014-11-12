@@ -12,13 +12,16 @@ plane, and you must have a font installed covering
 the Old Persian range of Unicode.)
 </p>
 
-<h2>Numeric signs and punctuation</h2>
+<h2>Punctuation</h2>
 <p>
-The sole punctuation mark in Old Persian, the word divider
-<code concordion:set="#worddiv">𐏐</code>,
-is transcribed with a colon, <code concordion:assertEquals="xlitPunct(#worddiv)">:</code>.
+The sole punctuation mark in Old Persian is the word divider
+<code concordion:set="#worddiv">𐏐</code>.  It is transcribed with a
+colon,
+<code concordion:assertEquals="getPunctXlit(#worddiv)">:</code>.
 </p>
+
 <div class="example">
+  <h3>Example</h3>
   <p>Conversely, the colon <code concordion:set="#colon">:</code> can be converted to the word divider,
   <code concordion:assertEquals="cuneiformPunct(#colon)">𐏐</code>.
   </p>
@@ -26,7 +29,19 @@ is transcribed with a colon, <code concordion:assertEquals="xlitPunct(#worddiv)"
 
 
 <h2>Logograms</h2>
+<p>The Old Persian script includes the following logograms,
+transliterated with the upper-case ASCII strings defined in this table:
+</p>
+
+<table concordion:execute="#result = getLogoXlit(#cuneiform)">
+  <tr>
+    <th concordion:set="#cuneiform">Cuneiform character</th>
+    <th concordion:assertEquals="#result">Transliteration</th>
+  </tr>
+  <tr><td>𐎣</td><td>ka</td></tr>
+</table>
 
 
+<h2>Numeric signs</h2>
 </body>
 </html>

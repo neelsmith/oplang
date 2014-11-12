@@ -74,8 +74,56 @@ uploadArchives {
 }
 
 
-task convertMd() {
-  println Processor.process("*Real* markdown", Configuration.DEFAULT)
+task createMdDir() {
+}
+createMdDir.doLast {
+  if (! buildDir.exists()) {
+    buildDir.mkdir()
+  }
+  File  mdWork = new File(buildDir,"md")
+  if (! mdWork.exists()) {
+    mdWork.mkdir()
+  }
+}
+
+task convertMd(dependsOn: [createMdDir]) {
+}
+
+
+convertMd.doLast {
+  //println Processor.process("*Real* markdown", Configuration.DEFAULT)
+  FileTree tree =  fileTree(mdDir) {
+    include "**/*.md"
+  }
+  tree.visit { f ->
+    if (f.relativePath.isFile()) {
+
+      File mdSource = new File("${mdDir}/${f.relativePath}")
+      println "IT's A FILE with parent " + f.relativePath.getParent()
+      println "to stirng = " + f.relativePath.toString()
+      def segs = f.relativePath.getSegments()
+      println "Segs: " + segs
+      String treePath = "${buildDir}/md"
+      Integer limit =  segs.size() - 1
+      segs.eachWithIndex { s, i ->
+
+	if (i < limit) {
+
+	  treePath = "${treePath}/${s}"
+	  File nxtDir = new File(treePath)
+	  if (! nxtDir.exists()) {
+	    nxtDir.mkdir()
+	  }
+	}
+      }
+      File currWork = new File(treePath)
+      String htmlStr = f.relativePath.getLastName().replaceFirst(/.md$/,".html")
+      File htmlFile = new File(currWork, htmlStr)
+      String body = Processor.process( mdSource.getText("UTF-8"), Configuration.DEFAULT)
+      htmlFile.setText("${htmlPreface}${body}${htmlEnd}", "UTF-8")
+      println "Created ${htmlFile}"
+    }
+  }
 }
 
 
