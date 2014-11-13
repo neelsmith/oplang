@@ -13,6 +13,11 @@ public class NonAlphabeticTest extends ConcordionTestCase {
     public String getLogoXlit(String op) {
 	return OPTransliteration.uToXLit(op);
     }
+
+    public String getLogoCun(String xlit) {
+	return OPTransliteration.xlitToU(xlit);
+    }
+
     
     public String getPunctXlit(String op) {
 	return OPTransliteration.uToXLit(op);

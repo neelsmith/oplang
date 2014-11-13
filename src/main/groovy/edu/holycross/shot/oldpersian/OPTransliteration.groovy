@@ -66,7 +66,21 @@ class OPTransliteration {
     "sha" :  66497,
     "sra" :  66498,
 
-    "ha" : 66499
+    "ha" : 66499,
+
+    "AM1" : 66504,
+    "AM2" : 66505,
+    "AMHA" : 66506,
+    "XS" : 66507,
+    "DH1" : 66508,
+    "DH2" : 66509,
+    "BG" : 66510,
+    "BU" : 66511,
+
+    "1": 66513,
+    "10": 66515,
+    "100": 66517
+    
   ]
 
 
@@ -307,12 +321,52 @@ class OPTransliteration {
     xlit = "ha"
     break
 
+    
+    /* Add logograms, numbers... */
+    case 66504:
+    xlit = "AM1"
+    break
+    case 66505:
+    xlit = "AM2"
+    break
+    case 66506:
+    xlit = "AMHA"
+    break
+    case 66507:
+    xlit = "XS"
+    break
+    case 66508:
+    xlit = "DH1"
+    break
+    case 66509:
+    xlit = "DH2"
+    break
+    case 66510:
+    xlit = "BG"
+    break
+    case 66511:
+    xlit = "BU"
+    break
+
 
     case 66512:
     xlit = ":"
     break
 
-    /* Add logograms, numbers... */
+
+
+    case 66513:
+    xlit = "1"
+    break
+    case 66515:
+    xlit = "10"
+    break
+    case 66517:
+    xlit = "100"
+    break
+
+
+
     default:
     System.err.println "OPTransliteration:xlitForCodePt: uncrecognized code point " + codept
     break

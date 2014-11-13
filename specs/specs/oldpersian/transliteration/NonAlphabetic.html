@@ -37,11 +37,57 @@ transliterated with the upper-case ASCII strings defined in this table:
   <tr>
     <th concordion:set="#cuneiform">Cuneiform character</th>
     <th concordion:assertEquals="#result">Transliteration</th>
+    <th>Transcription</th>
   </tr>
-  <tr><td>𐎣</td><td>ka</td></tr>
-</table>
+   <tr><td>𐏈</td><td>AM1</td><td/></tr>
+   <tr><td>𐏉</td><td>AM2</td><td/></tr>
+   <tr><td>𐏊</td><td>AMHA</td><td/></tr>
+   <tr><td>𐏋</td><td>XS</td><td/></tr>
+   <tr><td>𐏌</td><td>DH1</td><td/></tr>
+   <tr><td>𐏍</td><td>DH2</td><td/></tr>
+   <tr><td>𐏎</td><td>BG</td><td/></tr>
+   <tr><td>𐏏</td><td>BU</td><td/></tr>
+</table>  
 
+<div class="example">
+  <p>Because these mapping is 1-1, these relations can be
+  reversed.</p>
+<table concordion:execute="#result = getLogoCun(#logo)">
+  <tr>
+    <th concordion:set="#logo">Transliteration of logogram</th>
+    <th concordion:assertEquals="#result">Cuneiform</th>
+  </tr>
+   <tr><td>AM1</td><td>𐏈</td></tr>
+   <tr><td>AM2</td><td>𐏉</td></tr>
+   <tr><td>AMHA</td><td>𐏊</td></tr>
+   <tr><td>XS</td><td>𐏋</td></tr>
+   <tr><td>DH1</td><td>𐏌</td></tr>
+   <tr><td>DH2</td><td>𐏍</td></tr>
+   <tr><td>BG</td><td>𐏎</td></tr>
+   <tr><td>BU</td><td>𐏏</td></tr>
+</table>    
+</div>
 
 <h2>Numeric signs</h2>
+
+<p>The individual numeric signs are transcribed as follows:
+</p>
+<table concordion:execute="#result = getLogoXlit(#cuneiform)">
+  <tr>
+    <th concordion:set="#cuneiform">Cuneiform character</th>
+    <th concordion:assertEquals="#result">Transliteration</th>
+  </tr>
+  <tr><td>𐏑</td><td>1</td></tr>
+  <tr><td>𐏓</td><td>10</td></tr>
+  <tr><td>𐏕</td><td>100</td></tr>
+</table>
+
+<p>Usage signs in combination will be specified here.
+𐏑	1
+𐏒	2
+𐏓	10
+𐏔	20
+𐏕	100
+</p>
 </body>
 </html>

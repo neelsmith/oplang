@@ -1,6 +1,6 @@
 
 ext {
-    mdDir = "specs/md"
+    mdDir = "md"
 
     htmlPreface = """
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">

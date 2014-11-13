@@ -80,10 +80,14 @@ createMdDir.doLast {
   if (! buildDir.exists()) {
     buildDir.mkdir()
   }
-  File  mdWork = new File(buildDir,"md")
+  File  mdTop = new File(buildDir,"md")
+  if (! mdTop.exists()) {
+    mdTop.mkdir()
+  }
+  /*  File mdWork = new File(mdTop,"md")
   if (! mdWork.exists()) {
     mdWork.mkdir()
-  }
+  }*/
 }
 
 task convertMd(dependsOn: [createMdDir]) {
@@ -91,24 +95,20 @@ task convertMd(dependsOn: [createMdDir]) {
 
 
 convertMd.doLast {
+  println "Converting MD"
   //println Processor.process("*Real* markdown", Configuration.DEFAULT)
   FileTree tree =  fileTree(mdDir) {
     include "**/*.md"
   }
   tree.visit { f ->
     if (f.relativePath.isFile()) {
-
+      println "converting " + f
       File mdSource = new File("${mdDir}/${f.relativePath}")
-      println "IT's A FILE with parent " + f.relativePath.getParent()
-      println "to stirng = " + f.relativePath.toString()
       def segs = f.relativePath.getSegments()
-      println "Segs: " + segs
       String treePath = "${buildDir}/md"
       Integer limit =  segs.size() - 1
       segs.eachWithIndex { s, i ->
-
 	if (i < limit) {
-
 	  treePath = "${treePath}/${s}"
 	  File nxtDir = new File(treePath)
 	  if (! nxtDir.exists()) {
@@ -119,9 +119,11 @@ convertMd.doLast {
       File currWork = new File(treePath)
       String htmlStr = f.relativePath.getLastName().replaceFirst(/.md$/,".html")
       File htmlFile = new File(currWork, htmlStr)
+      println "Created ${htmlFile}"
+      
       String body = Processor.process( mdSource.getText("UTF-8"), Configuration.DEFAULT)
       htmlFile.setText("${htmlPreface}${body}${htmlEnd}", "UTF-8")
-      println "Created ${htmlFile}"
+
     }
   }
 }
@@ -140,26 +142,35 @@ sourceSets {
     }
     test {
         java {
-            srcDir "${buildDir}/specs"
+	  //srcDir "${buildDir}/specs"
+	  srcDir "specs"
         }
         resources {
-            srcDir "${buildDir}/specs"
+	  //srcDir "${buildDir}/specs"
+	  srcDir "specs"
         }
     }
 }
 
-
-task copySpecs(type: Copy) {
+task cpJava(type: Copy) {
   from "specs"
+  into "${buildDir}/specs"
+}
+
+
+task copySpecs(type: Copy, dependsOn: [convertMd, cpJava]) {
+  from "${buildDir}/md"
   into "${buildDir}/specs"
 }
 
 // Make all testing depend on a filter copy to buildDir.
 // If that works, make all testing depned on a md -> html xform,
 // and write specs in markdown.
-test.dependsOn  copySpecs
+//test.dependsOn  copySpecs
 
 test {
     systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
 
 }
+
+
