@@ -1,4 +1,4 @@
-package specs.oldpersian.transliteration;
+package oldpersian.transliteration;
 
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;

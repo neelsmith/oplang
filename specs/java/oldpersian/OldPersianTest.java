@@ -1,4 +1,4 @@
-package specs.oldpersian;
+package oldpersian;
 
 
 import org.concordion.integration.junit3.ConcordionTestCase;
