@@ -1,21 +1,13 @@
-<html xmlns:concordion="http://www.concordion.org/2007/concordion">
-<head>
-<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
-<title>Old Persian transliteration</title>
-</head>
-<body>
-<h1>Transliteration</h1>
-<p>(Note: to read this specification properly,
-your browser must be capable of displaying
-characters outside Unicode's basic multilingual
-plane, and you must have a font installed covering
-the Old Persian range of Unicode.)
-</p>
 
-<h2>Alphabetic signs</h2>
-<p>The following table defines a unique transliteration
-for thirty-six alphabetic signs:
-</p>
+# Transliteration #
+
+
+(Note: to read this specification properly, your browser must be capable of displaying characters outside Unicode's basic multilingual plane, and you must have a font installed covering the Old Persian range of Unicode.)
+
+## Alphabetic signs ##
+
+The following table defines a unique transliteration for thirty-six alphabetic signs:
+
 
    <table concordion:execute="#result = getXlit(#cuneiform)">
      <tr>
@@ -61,16 +53,14 @@ for thirty-six alphabetic signs:
 		
 </table>
 		
-<p>Because there is a one-to-one mapping of signs to transcription,
-the system can unambiguously convert transcription to the Unicode
-codepoint for each sign. 
-</p>
+Because there is a one-to-one mapping of signs to transcription, the system can unambiguously convert transcription to the Unicode codepoint for each sign. 
 
-<div class="example">
-<h3>Examples</h3>
-<p>The same thirty-six signs, here converted from transliteration to 
-Unicode code point:
-</p>
+
+
+### Examples ###
+
+
+The same thirty-six signs, here converted from transliteration to Unicode code point:
 
    <table concordion:execute="#result = getCuneiform(#xlit)">
      <tr>
@@ -113,12 +103,4 @@ Unicode code point:
 <tr><td>XA</td><td>𐎧</td></tr>
 <tr><td>YA</td><td>𐎹</td></tr>
 <tr><td>ZA</td><td>𐏀</td></tr>
-
 </table>
-
-</div>
-
-
-
-</body>
-</html>

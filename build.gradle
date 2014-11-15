@@ -158,6 +158,7 @@ task cpResources(type: Copy) {
 task setUpResources(dependsOn: cpResources) {
 }
 setUpResources.doLast {
+  println "READING FILE TREE FROM " + mdSrc
   FileTree tree = fileTree(mdSrc) {
     include "**/*.md"
   }

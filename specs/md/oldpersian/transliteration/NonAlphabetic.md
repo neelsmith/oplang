@@ -1,24 +1,16 @@
-<html xmlns:concordion="http://www.concordion.org/2007/concordion">
-<head>
-<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
-<title>Old Persian transliteration: non-alphabetic characters</title>
-</head>
-<body>
-<h1>Transliteration of non-alphabetic characters</h1>
-<p>(Note: to read this specification properly,
-your browser must be capable of displaying
-characters outside Unicode's basic multilingual
-plane, and you must have a font installed covering
-the Old Persian range of Unicode.)
-</p>
 
-<h2>Punctuation</h2>
-<p>
-The sole punctuation mark in Old Persian is the word divider
-<code concordion:set="#worddiv">𐏐</code>.  It is transcribed with a
-colon,
+# Transliteration of non-alphabetic characters #
+
+
+(Note: to read this specification properly, your browser must be capable of displaying characters outside Unicode's basic multilingual plane, and you must have a font installed covering the Old Persian range of Unicode.)
+
+
+## Punctuation ##
+
+
+The sole punctuation mark in Old Persian is the word divider <code concordion:set="#worddiv">𐏐</code>.  It is transcribed with a colon,
 <code concordion:assertEquals="getPunctXlit(#worddiv)">:</code>.
-</p>
+
 
 <div class="example">
   <h3>Example</h3>
@@ -28,10 +20,11 @@ colon,
 </div>
 
 
-<h2>Logograms</h2>
-<p>The Old Persian script includes the following logograms,
-transliterated with the upper-case ASCII strings defined in this table:
-</p>
+## Logograms ##
+
+
+The Old Persian script includes the following logograms, transliterated with the upper-case ASCII strings defined in this table:
+
 
 <table concordion:execute="#result = getLogoXlit(#cuneiform)">
   <tr>
@@ -49,9 +42,9 @@ transliterated with the upper-case ASCII strings defined in this table:
    <tr><td>𐏏</td><td>BU</td><td/></tr>
 </table>  
 
-<div class="example">
-  <p>Because these mapping is 1-1, these relations can be
-  reversed.</p>
+
+Because these mapping is 1-1, these relations can be  reversed.
+
 <table concordion:execute="#result = getLogoCun(#logo)">
   <tr>
     <th concordion:set="#logo">Transliteration of logogram</th>
@@ -66,12 +59,14 @@ transliterated with the upper-case ASCII strings defined in this table:
    <tr><td>BG</td><td>𐏎</td></tr>
    <tr><td>BU</td><td>𐏏</td></tr>
 </table>    
-</div>
 
-<h2>Numeric signs</h2>
 
-<p>The individual numeric signs are transcribed as follows:
-</p>
+## Numeric signs ##
+
+
+
+The individual numeric signs are transcribed as follows:
+
 <table concordion:execute="#result = getLogoXlit(#cuneiform)">
   <tr>
     <th concordion:set="#cuneiform">Cuneiform character</th>
@@ -82,12 +77,10 @@ transliterated with the upper-case ASCII strings defined in this table:
   <tr><td>𐏕</td><td>100</td></tr>
 </table>
 
-<p>Usage signs in combination will be specified here.
+Usage of signs in combination will be specified here.
 𐏑	1
 𐏒	2
 𐏓	10
 𐏔	20
 𐏕	100
-</p>
-</body>
-</html>
+

@@ -1,5 +1,5 @@
 ext {
-    mdSrc = "specs/markdown"
+    mdSrc = "specs/md"
     
     htmlPreface = """
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
