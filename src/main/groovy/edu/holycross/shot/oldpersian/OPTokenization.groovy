@@ -17,43 +17,38 @@ class OPTokenization {
   OPTokenization(ArrayList inputLines) {
     String currLine = ""
     String prevLine = ""
-    String prev = ""
+    String prevWordStart = ""
     inputLines.each { pair ->
       String ref = pair[0]
-      String txt = pair[1]
+      String txt = "${prevWordStart}${pair[1]}"
+      
       def wds = txt.split(/:/)
       Integer limit
 
       if (txt.charAt(txt.size() - 1) == '-') {
-	//println "Continue word!"
-	prev = wds[wds.size() - 1]
+	prevWordStart = wds[wds.size() - 1]
 	currLine = ref
 	limit = wds.size() - 2
 
       } else {
 	limit = wds.size() - 1
-	prev = ""
+	prevWordStart = ""
 	currLine = ""
       }
-
       wds.eachWithIndex { w, i ->
 	if (w != "") {
 	  if (i == 0) {
 	    if (prevLine != "") {
-	      //println "${w}\t${prevLine}-${cols[0]}"
 	      OPToken token = new OPToken("${prevLine}-${ref}",w)
 	      tokens.add(token)
 	      
 	    } else {
-	      //println "${w}\t${cols[0]}"
 	      OPToken token = new OPToken(ref,w)
 	      tokens.add(token)
 	    }
 	  } else if (i <= limit) {
 	    OPToken token = new OPToken(ref,w)
 	    tokens.add(token)
-
-	    
 	  }
 	}
 
