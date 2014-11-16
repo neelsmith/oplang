@@ -6,11 +6,11 @@
 
 ## Overview ##
 
-The `oplang` library defines two equivalent transliteration systems for representing text in Old Persian cuneiform.    Fifty Unicode code points in the range for Old Persian cuneiform are equated with unique, case-sensitive ASCII equivalents, so text can be converted from either representation to the other unambiguously and without loss of information.  White space is ignored.    
+The `oplang` recognizes content represented either with Unicode code points in the range for Old Persian cuneiform, or in a case-sensitive ASCII transliteration.   Fifty Unicode code points in the range for Old Persian cuneiform are equated with unique ASCII equivalents, so text can be converted from either representation to the other unambiguously and without loss of information.  White is may be included, but is not significant, and is ignored  in converting between representations.
 
-In the *strict* transliteration, only the defined transliterations and white space are permitted.  In converting from cuneiform code points to ASCII equivalents, it is an error if the input includes code points other than the fifty Old Persian cuneiform characters or white space.  In converting from ASCII transliteration to cuneiform code points, it is an error if the input cannot be parsed into character units according to the specification for [transliteration of continous text](ContinuousText.html), or if any of the character units are not one of the fifty specified ASCII strings.
+By default, the library  accepts input composed only of the defined input values or white space. In this *strict* representation, when converting from cuneiform code points to ASCII equivalents, it is an error if the input includes code points other than the fifty Old Persian cuneiform characters or white space.  In converting from ASCII transliteration to cuneiform code points, it is an error if the input cannot be parsed into character units according to the specification for [transliteration of continous text](ContinuousText.html), or if any of the character units are not one of the fifty specified ASCII strings.
 
-In the *expanded* transliteration, square brackets, angle brackets, braces and parentheses are also permitted.  In converting from one transliteration to the other, they are passed through unchanged.
+The library also supports an  *expanded* transliteration, in which square brackets, angle brackets, braces and parentheses are also permitted.  In converting from one representation to the other, they are passed through unchanged.
 
 <div class="example">
 <h3>Examples of strict system of cuneiform code points</h3>
@@ -57,6 +57,14 @@ because it  includes a syllabic string (<code>doo</code>) not defined in the ASC
 
 <h3>Examples of expanded transliteration systems</h3>
 <p><strong>Valid input.</strong></p>
+
+<blockquote>
+<code concordion:set="#good">𐎠𐎭(𐎶)</code>
+</blockquote>
+<p>In the expanded representation, parentheses may be included.  Converting this to ASCII transliteration in the extended system results in
+<code concordion:assertEquals="getXlitForCuneiformLoose(#good)">a-da(-ma)</code>.
+</p>
+
 </div>
 
 
@@ -71,4 +79,5 @@ See the full specification for:
 - [eight logograms and one punctuation character](NonAlphabetic.html)
 - [numbers written with five distinct signs](Numbers.html)
 - [transliteration of continuous text](ContinuousText.html)
+- [expanded transliteration systems](ExpandedTransliteration.html) (allowing brackets, etc.)
 

@@ -10,6 +10,8 @@ class OPTransliteration {
   //static Integer debug = 1
   
 
+
+  
   /** Unicode code point for Old Persian word divider.*/
   static int WORD_DIVIDER = 66512
 
@@ -105,13 +107,18 @@ class OPTransliteration {
     }
   }
 
+  static String xlitToU(String s)
+  throws Exception {
+    return xlitToU(s,true)
+  }
+  
   /** Convert a string in ASCII transliteration to 
    * Old Persian range of Unicode.
    * @param s String  in ASCII transliteration.
    * @returns A String in the Unicode range for Old Persian.
    * @throws Exception if input is not valid.
    */
-  static String xlitToU(String s)
+  static String xlitToU(String s, boolean strict)
   throws Exception {
     StringBuilder sb = new StringBuilder()
     // Ignore white space, split into words, then tokenize:
@@ -154,6 +161,34 @@ class OPTransliteration {
     return sb.toString()
   }
 
+
+  static String uToXLit(String s)
+  throws Exception{
+    return uToXLit(s,true)
+  }
+
+  // true if codept is one of the brackets
+  // accepted in expanded transliteration
+  static boolean isBracket(int codept) {
+    switch (codept) {
+    case 40:
+    case 41:
+    case 60:
+    case 62:
+    case 91:
+    case 93:
+    case 123:
+    case 125:
+    return true
+    break
+      
+    default:
+    return false
+    break
+    }
+  }
+
+  
   /** Convert a string in Old Persian range of Unicode
    * to the transliteration scheme specified in this project.
    * @param s String of Old Persian represented in Unicode 
@@ -163,15 +198,16 @@ class OPTransliteration {
    * white space or one of 50 code points defined for Old Persian
    * cuneiform.
    */
-  static String uToXLit(String s)
+  static String uToXLit(String s, boolean strict)
   throws Exception  {
     StringBuffer uBuffer = new StringBuffer(s.replaceAll(/\w/,''))
     int cp = uBuffer.codePointAt(0)
 
     int max = uBuffer.codePointCount(0, uBuffer.length() - 1)
-    StringBuffer xlit = new StringBuffer(xlitForCodePoint(cp));
+    StringBuffer xlit = new StringBuffer(xlitForCodePoint(cp, strict));
     int idx = 0
     boolean inWord = (cp != WORD_DIVIDER)
+
     Integer cpsFound = 0
     while (cpsFound < max) {
       cpsFound++;
@@ -183,12 +219,18 @@ class OPTransliteration {
 
 	} else {
 	  
-	  String charXlit = xlitForCodePoint(nextCP)
+	  String charXlit = xlitForCodePoint(nextCP, strict)
 	  if (charXlit.size() > 0) {
-	    if (inWord) {
-	      xlit.append("-${charXlit}")
+	    if (isBracket(nextCP)) {
+	      StringBuilder sb = new StringBuilder()
+	      sb.appendCodePoint(nextCP)
+	      xlit.append(sb.toString())
 	    } else {
-	      xlit.append(charXlit)
+	      if (inWord) {
+		xlit.append("-${charXlit}")
+	      } else {
+		xlit.append(charXlit)
+	      }
 	    }
 	  }
 	  inWord = true
@@ -199,8 +241,11 @@ class OPTransliteration {
     return xlit.toString()
   }
 
-
-
+  /*
+  static String xlitForCodePoint(int codept)
+  throws Exception  {
+    return xlitForCodePoint(codept,true)
+    }*/
   /** Converts a single Unicode code point to
    * the corresponding transliteration.
    * @param codept The Unicode code point for a
@@ -208,7 +253,7 @@ class OPTransliteration {
    * @returns The corresponding transliteration.
    * @throws Exception if the character is undefined.
    */
-  static String xlitForCodePoint(int codept)
+  static String xlitForCodePoint(int codept, boolean strict)
   throws Exception {
     String xlit = ""
 
@@ -382,6 +427,25 @@ class OPTransliteration {
     case 32:
     break
 
+
+    // pass along brackets if in "expanded" mode
+    case 40:
+    case 41:
+    case 60:
+    case 62:
+    case 91:
+    case 93:
+    case 123:
+    case 125:
+    if (strict) {
+      throw new Exception("OPTransliteration:xlitForCodePoint: invalid code point ${codept}")
+    } else {
+      StringBuilder sb = new StringBuilder()
+      sb.appendCodePoint(codept)
+      xlit = sb.toString()
+    }
+    break
+    
     default:
     //System.err.println "OPTransliteration:xlitForCodePt: uncrecognized code point " + codept
     throw new Exception("OPTransliteration:xlitForCodePoint: invalid code point ${codept}")

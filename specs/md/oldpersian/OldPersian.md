@@ -1,12 +1,12 @@
 # Old Persian #
 
 
-This specification defineds a computational system for working with
+This specification defines a computational system for working with
 Old Persian cuneiform.  It includes:
 
-- an unambiguous one-to-one mapping of [transliteration to Unicode characters](transliteration/Transliteration.html) in the
+- an unambiguous one-to-one mapping of [ASCII transliteration to Unicode characters](transliteration/Transliteration.html) in the
   Old Persian range
-- a [sorting order for Old Persian cuneiform](sorting/Sorting.html)
+- a [sorting order for Old Persian cuneiform](sorting/Sorting.html) (TO BE ADDED)
 - [tokenization of continuous text](tokenization/Tokenization.html) into orthographic tokens
  
 

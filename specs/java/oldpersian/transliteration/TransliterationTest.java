@@ -10,6 +10,12 @@ import org.concordion.integration.junit3.ConcordionTestCase;
 public class TransliterationTest extends ConcordionTestCase {
 
 
+    public String parseData(String blockOData) {
+	String [] arr = blockOData.split("\n");
+	return "Number lines = " + arr.length;
+    }
+    
+
     // Test bad input.  Return true if
     // transliteraion correctly throws an Exception
     public boolean failedCuneiform(String op) {
@@ -37,6 +43,16 @@ public class TransliterationTest extends ConcordionTestCase {
      public String getXlitForCuneiform(String op) {
 	 try {
 	     return OPTransliteration.uToXLit(op);
+	 } catch (Exception e) {
+	     return e.toString();
+	 }
+    }
+
+
+    public String getXlitForCuneiformLoose(String op) {
+	boolean strict = false;
+	try {
+	    return OPTransliteration.uToXLit(op, strict);
 	 } catch (Exception e) {
 	     return e.toString();
 	 }

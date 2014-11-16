@@ -5,21 +5,6 @@
 (Note: to read this specification properly, your browser must be capable of displaying characters outside Unicode's basic multilingual plane, and you must have a font installed covering the Old Persian range of Unicode.)
 
 
-## Punctuation ##
-
-
-The sole punctuation mark in Old Persian is the word divider <code concordion:set="#worddiv">𐏐</code>.  It is transcribed with a colon,
-<code concordion:assertEquals="getPunctXlit(#worddiv)">:</code>.
-
-
-<div class="example">
-  <h3>Example</h3>
-  <p>Conversely, the colon <code concordion:set="#colon">:</code> can be converted to the word divider,
-  <code concordion:assertEquals="cuneiformPunct(#colon)">𐏐</code>.
-  </p>
-</div>
-
-
 ## Logograms ##
 
 
@@ -60,4 +45,20 @@ Because these mapping is 1-1, these relations can be  reversed.
    <tr><td>BU</td><td>𐏏</td></tr>
 </table>    
 
+
+
+
+## Punctuation ##
+
+
+The sole punctuation mark in Old Persian is the word divider <code concordion:set="#worddiv">𐏐</code>.  It is transcribed with a colon,
+<code concordion:assertEquals="getPunctXlit(#worddiv)">:</code>.
+
+
+<div class="example">
+  <h3>Example</h3>
+  <p>Conversely, the colon <code concordion:set="#colon">:</code> can be converted to the word divider,
+  <code concordion:assertEquals="cuneiformPunct(#colon)">𐏐</code>.
+  </p>
+</div>
 
