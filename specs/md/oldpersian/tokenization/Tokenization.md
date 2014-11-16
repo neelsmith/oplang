@@ -9,8 +9,8 @@ While diplomatic editions of Old Persian texts are conventionally cited by physi
 <h3>Example</h3>
 <p>The tokenization of the following pairings of identifiers and transliterated texs yields produces an ordered list of four tokens:</p>
 
-<pre concordion:set="#datablock">1=a-da-ma:d-a-ra-ya-va-u-sha:xa-
-2=sha-a-ya-tha-i-ya:va-za-ra-ka:
+<pre concordion:set="#datablock">line1=a-da-ma:d-a-ra-ya-va-u-sha:xa-
+line2=sha-a-ya-tha-i-ya:va-za-ra-ka:
 </pre>
 
 
@@ -23,19 +23,19 @@ While diplomatic editions of Old Persian texts are conventionally cited by physi
 <tr>
 <td>0</td>
 <td>a-da-ma</td>
-<td>1</td>
+<td>line1</td>
 </tr>
 
 <tr>
 <td>1</td>
 <td>d-a-ra-ya-va-u-sha</td>
-<td>1</td>
+<td>line1</td>
 </tr>
 
 
-<tr><td>2</td><td>xa-sha-a-ya-tha-i-ya</td><td>1-2</td></tr>
+<tr><td>2</td><td>xa-sha-a-ya-tha-i-ya</td><td>line1-line2</td></tr>
 
-<tr><td>3</td><td>va-za-ra-ka</td><td>2</td></tr>
+<tr><td>3</td><td>va-za-ra-ka</td><td>line2</td></tr>
 
 </table>
 

@@ -31,7 +31,6 @@ public class TokenizationTest extends ConcordionTestCase {
 		} else {
 		    //
 		}
-		System.err.println ("Entr " + i + ": " + inputLines) ;
 	}
 	OPTokenization tokenization = new OPTokenization(inputLines);
 	return( tokenization.getToken(idx));
