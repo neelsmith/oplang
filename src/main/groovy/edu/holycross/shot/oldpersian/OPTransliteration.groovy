@@ -139,7 +139,8 @@ class OPTransliteration {
     words.each { w ->
       def tokens = w.split('-')
       tokens.each { t ->
-	String lc = t.toLowerCase()
+	//String lc = t.toLowerCase()
+	String lc = t
 	if (xlitMap[lc]) {
 	  sb.appendCodePoint(xlitMap[lc])
 	} else {
