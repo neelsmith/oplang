@@ -6,8 +6,8 @@ Old Persian cuneiform.  It includes:
 
 - an unambiguous one-to-one mapping of [transliteration to Unicode characters](transliteration/Transliteration.html) in the
   Old Persian range
-- a sorting order for Old Persian cuneiform
-- tokenization of continuous text into orthographic tokens
+- a [sorting order for Old Persian cuneiform](sorting/Sorting.html)
+- [tokenization of continuous text](tokenization/Tokenization.html) into orthographic tokens
  
 
 ## Key to visual conventions ##

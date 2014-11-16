@@ -109,8 +109,10 @@ class OPTransliteration {
    * Old Persian range of Unicode.
    * @param s String  in ASCII transliteration.
    * @returns A String in the Unicode range for Old Persian.
+   * @throws Exception if input is not valid.
    */
-  static String xlitToU(String s) {
+  static String xlitToU(String s)
+  throws Exception {
     StringBuilder sb = new StringBuilder()
     // Ignore white space, split into words, then tokenize:
     def words = []
@@ -144,7 +146,8 @@ class OPTransliteration {
 	if (xlitMap[lc]) {
 	  sb.appendCodePoint(xlitMap[lc])
 	} else {
-	  System.err.println "No mapping for ${t}"
+	  throw new Exception("OPTransliteration:xlitToU: no transliteration for string ${lc}")
+	  //System.err.println "No mapping for ${t}"
 	}
       }
     }
@@ -156,9 +159,13 @@ class OPTransliteration {
    * @param s String of Old Persian represented in Unicode 
    * range for Old Persian.
    * @returns A String in ASCII transliteration.
+   * @throws Exception if input includes code points other than
+   * white space or one of 50 code points defined for Old Persian
+   * cuneiform.
    */
-  static String uToXLit(String s) {
-    StringBuffer uBuffer = new StringBuffer(s)
+  static String uToXLit(String s)
+  throws Exception  {
+    StringBuffer uBuffer = new StringBuffer(s.replaceAll(/\w/,''))
     int cp = uBuffer.codePointAt(0)
 
     int max = uBuffer.codePointCount(0, uBuffer.length() - 1)
@@ -198,10 +205,11 @@ class OPTransliteration {
    * the corresponding transliteration.
    * @param codept The Unicode code point for a
    * single Old Persian character.
-   * @returns The corresponding transliteration, or a
-   * null string if the character is undefined.
+   * @returns The corresponding transliteration.
+   * @throws Exception if the character is undefined.
    */
-  static String xlitForCodePoint(int codept) {
+  static String xlitForCodePoint(int codept)
+  throws Exception {
     String xlit = ""
 
     switch (codept) {
@@ -367,9 +375,16 @@ class OPTransliteration {
     break
 
 
+    // ignore whitespace:
+    case 9:
+    case 10:
+    case 13:
+    case 32:
+    break
 
     default:
-    System.err.println "OPTransliteration:xlitForCodePt: uncrecognized code point " + codept
+    //System.err.println "OPTransliteration:xlitForCodePt: uncrecognized code point " + codept
+    throw new Exception("OPTransliteration:xlitForCodePoint: invalid code point ${codept}")
     break
 
     }
