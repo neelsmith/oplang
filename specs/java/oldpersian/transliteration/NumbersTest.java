@@ -7,9 +7,10 @@ import edu.holycross.shot.oldpersian.OPTransliteration;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
 
-public class AlphabeticTest extends ConcordionTestCase {
-    
-    public String getXlit(String op) {
+public class NumbersTest extends ConcordionTestCase {
+
+
+    public String getLogoXlit(String op) {
 	try {
 	    return OPTransliteration.uToXLit(op);
 	} catch (Exception e) {
@@ -17,7 +18,24 @@ public class AlphabeticTest extends ConcordionTestCase {
 	}
     }
 
-    public String getCuneiform(String xlit) {
+    public String getLogoCun(String xlit) {
+	try {
+	    return OPTransliteration.xlitToU(xlit);
+	} catch (Exception e) {
+	    return e.toString();
+	}
+    }
+
+    
+    public String getPunctXlit(String op) {
+	try {
+	    return OPTransliteration.uToXLit(op);
+	} catch (Exception e) {
+	    return e.toString();
+	}
+    }
+
+    public String cuneiformPunct(String xlit) {
 	try {
 	    return OPTransliteration.xlitToU(xlit);
 	} catch (Exception e) {

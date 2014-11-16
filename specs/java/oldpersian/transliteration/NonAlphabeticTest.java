@@ -11,20 +11,36 @@ public class NonAlphabeticTest extends ConcordionTestCase {
 
 
     public String getLogoXlit(String op) {
-	return OPTransliteration.uToXLit(op);
+	try {
+	    return OPTransliteration.uToXLit(op);
+	} catch (Exception e) {
+	    return e.toString();
+	}
     }
 
     public String getLogoCun(String xlit) {
-	return OPTransliteration.xlitToU(xlit);
+	try {
+	    return OPTransliteration.xlitToU(xlit);
+	} catch (Exception e) {
+	    return e.toString();
+	}
     }
 
     
     public String getPunctXlit(String op) {
-	return OPTransliteration.uToXLit(op);
+	try {
+	    return OPTransliteration.uToXLit(op);
+	} catch (Exception e) {
+	    return e.toString();
+	}
     }
 
     public String cuneiformPunct(String xlit) {
-	return OPTransliteration.xlitToU(xlit);
+	try {
+	    return OPTransliteration.xlitToU(xlit);
+	} catch (Exception e) {
+	    return e.toString();
+	}
     }
 
 }
