@@ -1,13 +1,16 @@
 package edu.holycross.shot.oldpersian
 
 
-/** occurence of a token
+/** An instance of an orthographic token.
  */
 class OPToken {
 
+  /** Identifier for the passage where the token occurs.*/
   String occurrence
+  /** String, in transliteration, of the token. */
   String token
 
+  /** Authority list for validating tokens. */
   static URL authList = new URL("https://raw.githubusercontent.com/neelsmith/op/master/collections/vocab.csv")
 
   

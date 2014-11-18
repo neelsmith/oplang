@@ -39,6 +39,16 @@ line2=sha-a-ya-tha-i-ya:va-za-ra-ka:
 
 </table>
 
-<p></p>
 </div>
+
+
+The library supports an option to accept the extended transliteration (possibly including brackets, etc.), but to strip them out of the tokenization.
+
+### Example ###
+
+Given a sequence <code concordion:set="#extended">a[-da]-ma:</code>, the 
+first token (<code concordion:set="#idx">0</code>) in the
+resulting <span concordion:execute="#result=extractStrippedToken(#extended,#idx)">tokenization</span> should be 
+
+ <strong concordion:assertEquals="#result.token">a-da-ma</strong>.
 
