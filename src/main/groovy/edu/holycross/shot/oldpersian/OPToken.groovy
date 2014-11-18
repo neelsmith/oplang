@@ -7,6 +7,9 @@ class OPToken {
 
   String occurrence
   String token
+
+  static URL authList = new URL("https://raw.githubusercontent.com/neelsmith/op/master/collections/vocab.csv")
+
   
   // can be initialized from an arraylist of
   // pairings between ID (such as URN) and xliterated
@@ -19,4 +22,53 @@ class OPToken {
   }
 
 
+  static boolean textIsValid(URL csvFile, String txt) {
+    boolean valid = true
+
+    def tokenList = [];
+    Integer idx = 0;
+    csvFile.getText("UTF-8").eachLine { l ->
+      idx++;
+      def cols = l.split(/,/);
+      if (cols.size() > 1) {
+	def pair = [idx, cols[1]];
+	tokenList.add(pair);
+	}
+    }
+
+    
+    def inputLines = []
+    txt.eachLine {
+      inputLines.add(it)
+    }
+    System.err.println "textisvalid: using token list " + tokenList.size() + " and input lines " + inputLines.size()
+    OPTokenization tokens = new OPTokenization(inputLines);
+    tokens.tokens.each { t ->
+      System.err.println "Examine token " + t.token
+      if (! tokenList.contains(t.token)) {
+	valid = false;
+	System.err.println "NO match for " + t.token
+      }
+    }
+    return (valid)
+  }
+
+  
+  static boolean isValid(URL csvFile, String form) {
+    // col 0 = urn, col 1 =form
+    boolean valid = false
+    csvFile.getText("UTF-8").eachLine { l ->
+      def cols = l.split(/,/)
+      if (form == cols[1]) {
+	valid = true
+      }
+    }
+    return valid
+  }
+  
+  static boolean isValid(String form) {
+    return isValid(authList, form)
+  }
+
+  
 }
