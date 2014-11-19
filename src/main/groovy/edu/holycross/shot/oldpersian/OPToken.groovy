@@ -44,10 +44,8 @@ class OPToken {
     txt.eachLine {
       inputLines.add(it)
     }
-    //System.err.println "textisvalid: using token list " + tokenList.size() + " and input lines " + inputLines.size()
     OPTokenization tokens = new OPTokenization(inputLines);
     tokens.tokens.each { t ->
-      //System.err.println "Examine token " + t.token
       if (! tokenList.contains(t.token)) {
 	valid = false;
 	System.err.println "NO match for " + t.token

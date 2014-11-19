@@ -59,13 +59,13 @@ class OPTokenization {
 	  currLine = ""
 	}
 	wds.eachWithIndex { w, i ->
+	  w = w.replaceAll(/\s+/,'')
 	  if (w != "") {
 	    if (stripExtended) {
 	      //System.err.print "Strip extended: look at ${w}..."
 	      //w = w.replaceAll(/[\\[\\]\\(\\)\\{\\}<>]/,'')
 	      w = w.replaceAll(/[\[\]<>\(\)\{\}]/,'')
 	      //System.err.println " and go to ${w}"
-			       
 	    }
 	    
 	    if (i == 0) {
