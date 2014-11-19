@@ -9,7 +9,8 @@ The following components have been specified with tests passed by the current ve
 - an unambiguous one-to-one mapping of [ASCII transliteration to Unicode characters](transliteration/Transliteration.html) in the  Old Persian range
 - [tokenization of continuous text](tokenization/Tokenization.html) into orthographic tokens
  - [validation of tokens against an authority list](validation/Validation.html)
- 
+- [relating tokens in a text to lexical information](lexical/Lexical.html)
+
 The following components are either incompletely specified or incompletely implemented:
 
 - a [sorting order for Old Persian cuneiform](sorting/Sorting.html) 
