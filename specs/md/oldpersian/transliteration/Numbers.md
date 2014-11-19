@@ -24,3 +24,4 @@ Usage of signs in combination will be specified here.
 𐏔	20
 𐏕	100
 
+Any token composed exclusively of the digits 0-9 is valid, e.g. <strong concordion:assertTrue="isValidNumber(#TEXT)">19</strong> is a valid token.

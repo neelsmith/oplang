@@ -44,10 +44,10 @@ class OPToken {
     txt.eachLine {
       inputLines.add(it)
     }
-    System.err.println "textisvalid: using token list " + tokenList.size() + " and input lines " + inputLines.size()
+    //System.err.println "textisvalid: using token list " + tokenList.size() + " and input lines " + inputLines.size()
     OPTokenization tokens = new OPTokenization(inputLines);
     tokens.tokens.each { t ->
-      System.err.println "Examine token " + t.token
+      //System.err.println "Examine token " + t.token
       if (! tokenList.contains(t.token)) {
 	valid = false;
 	System.err.println "NO match for " + t.token
@@ -60,10 +60,15 @@ class OPToken {
   static boolean isValid(URL csvFile, String form) {
     // col 0 = urn, col 1 =form
     boolean valid = false
-    csvFile.getText("UTF-8").eachLine { l ->
-      def cols = l.split(/,/)
-      if (form == cols[1]) {
-	valid = true
+    if (form ==~ /\d+/) {
+      valid = true
+    }
+    if (! valid) {
+      csvFile.getText("UTF-8").eachLine { l ->
+	def cols = l.split(/,/)
+	if (form == cols[1]) {
+	  valid = true
+	}
       }
     }
     return valid

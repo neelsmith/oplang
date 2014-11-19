@@ -9,7 +9,7 @@ apply plugin:  "groovy"
 apply plugin:  "maven"
 
 group = "edu.holycross.shot"
-version = '0.0.1'
+version = '0.0.3'
 
 apply from: "versions.gradle"
 apply from: "conf.gradle"

@@ -27,8 +27,8 @@ class OPTokenization {
     void initTokens(ArrayList inputLines, boolean stripExtended) {
 
       if (stripExtended) {
-	System.err.println "INITIALIZING WITH STRIP EXTENDED TRUE"
-	System.err.println "Input is " + inputLines
+	//System.err.println "INITIALIZING WITH STRIP EXTENDED TRUE"
+	//System.err.println "Input is " + inputLines
       }
       
     String currLine = ""
@@ -36,7 +36,7 @@ class OPTokenization {
     String prevWordStart = ""
     inputLines.each { pair ->
       	if (stripExtended) {
-	  System.err.println "Pair: " + pair
+	  //System.err.println "Pair: " + pair
 	}
       if (pair.size() == 2 ) {
 	String ref = pair[0]
@@ -44,7 +44,7 @@ class OPTokenization {
       
 	def wds = txt.split(/:/)
 	if (stripExtended) {
-	  System.err.println "CONSIDER: " + wds.size() + " words"
+	  //System.err.println "CONSIDER: " + wds.size() + " words"
 	}
 	Integer limit
 
@@ -61,10 +61,10 @@ class OPTokenization {
 	wds.eachWithIndex { w, i ->
 	  if (w != "") {
 	    if (stripExtended) {
-	      System.err.print "Strip extended: look at ${w}..."
+	      //System.err.print "Strip extended: look at ${w}..."
 	      //w = w.replaceAll(/[\\[\\]\\(\\)\\{\\}<>]/,'')
 	      w = w.replaceAll(/[\[\]<>\(\)\{\}]/,'')
-	      System.err.println " and go to ${w}"
+	      //System.err.println " and go to ${w}"
 			       
 	    }
 	    
