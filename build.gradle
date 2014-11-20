@@ -9,7 +9,7 @@ apply plugin:  "groovy"
 apply plugin:  "maven"
 
 group = "edu.holycross.shot"
-version = '0.0.5'
+version = '0.0.6'
 
 apply from: "versions.gradle"
 apply from: "conf.gradle"
@@ -56,7 +56,7 @@ repositories {
 dependencies {
   compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
 
-
+  compile group: 'net.sf.opencsv', name: 'opencsv', version: '2.3'
   
   //testCompile group: 'junit', name: 'junit', version: junitVersion
   testCompile 'junit:junit:4.11'
