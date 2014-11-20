@@ -28,7 +28,7 @@ Recognized forms can be resolved to a specific lexical entity.
 ### Examples ###
 
 
-The nominative form of the first pronouns is **adam** (<code concordion:set="#adam">urn:cite:oldpersian:orth.form4</code>).  
+The nominative form of the first person pronoun is **adam** (<code concordion:set="#adam">urn:cite:oldpersian:orth.form4</code>).  
 When we <span concordion:execute="#an1 = findLemma(#adam)">analyze it morphologically</span>,  we find that it is a form of the lexical entity 
 <strong concordion:assertEquals="#an1.lexicalEntityUrn">urn:cite:oldpersian:lex.4</strong>.
 
