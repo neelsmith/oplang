@@ -18,6 +18,10 @@ class OPMorphAnalysis {
 
   String verbString() {
     def cols = morphologyCode.split(/:/)
+
+    if (cols.size() < 5) {
+      return morphologyCode
+    } else {
     String asString = ""
     switch (cols[0]) {
     case "1":
@@ -86,11 +90,16 @@ class OPMorphAnalysis {
     break
     }
     
-    return asString    
+    return asString
+    }
   }
 
   String nounString() {
     def cols = morphologyCode.split(/:/)
+
+    if (cols.size() < 3) {
+      return morphologyCode
+    } else {
     String asString = ""
     switch (cols[0]) {
     case "masc":
@@ -139,18 +148,31 @@ class OPMorphAnalysis {
     break
     }
     return asString
+    }
   }
+  
   String toString (String pos) {
     switch (pos) {
+      // all substantive forms with GCN:
     case "noun":
     case "pronoun":
+    case "adjective":
     return nounString()
     break
-    
+
     case "verb":
     return verbString()
     break
 
+
+    case "conjunction":
+    case "adverb":
+    case "particle":
+    case "preposition":
+    return "indeclinable"
+    break
+
+    
     default:
     System.err.println "Unrecognized part of speech: " + pos
     break
