@@ -16,9 +16,26 @@ public class MorphologyTest extends ConcordionTestCase {
     OPLexicon lexicon = new OPLexicon();    
     OPMorphology morphology = new OPMorphology();
 
+
+    public boolean isCompound(String formUrn)
+    throws Exception {
+	try {
+	    String analysisUrn = morphology.getAnalysisUrn(formUrn, 0);
+	    return morphology.isCompound(analysisUrn);
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
+    
+    public int numberMorphs(String formUrn) {
+	return morphology.numberAnalyses(formUrn);
+    }
+    
+
+    // for words with a single analysis, get readable label 
     public String posString(String urn, String pos) {
-	System.err.println ("Analyzing morphology of " + urn + " for part of speech " + pos);
-	OPMorphAnalysis morph =  morphology.analyzeForm(urn);
+	OPMorphAnalysis morph = morphology.getAnalysis(urn,0);
 	return morph.toString(pos);
     }
 

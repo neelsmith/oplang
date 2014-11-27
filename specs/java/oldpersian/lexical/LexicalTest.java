@@ -3,6 +3,9 @@ package oldpersian.lexical;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
+
 import edu.holycross.shot.oldpersian.OPFormList;
 import edu.holycross.shot.oldpersian.OPLexicon;
 import edu.holycross.shot.oldpersian.OPMorphAnalysis;
@@ -16,8 +19,10 @@ public class LexicalTest extends ConcordionTestCase {
     OPLexicon lexicon = new OPLexicon();    
     OPMorphology morphology = new OPMorphology();
 
+
+    // for 1-analysis items
     public OPMorphAnalysis findLemma(String urn) {
-	return morphology.analyzeForm(urn);
+	return morphology.getAnalysis(urn, 0);
     }
 
     
